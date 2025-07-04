@@ -1,0 +1,42 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: >-
+      /environments/**;
+      /charts/**;
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: dmp-roadmap-prod
+  namespace: dmp-roadmap-prod
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dmp-roadmap-prod
+  project: dmp-roadmap
+  sources:
+    - ref: values
+      repoURL: https://github.com/portagenetwork/roadmap-deploy.git
+      targetRevision: main
+    - path: environments/prod/sealed-secrets
+      repoURL: https://github.com/portagenetwork/roadmap-deploy.git
+      targetRevision: main
+    - helm:
+        ignoreMissingValueFiles: true
+        releaseName: dmp-roadmap-prod
+        valueFiles:
+          - $values/environments/base/values.yaml
+          - $values/environments/prod/values.yaml
+      path: charts/dmp-roadmap
+      repoURL: https://github.com/portagenetwork/roadmap.git
+      targetRevision: deployment-portage
+  syncPolicy:
+    retry:
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 1m
+      limit: 1
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - CreateNamespace=true
