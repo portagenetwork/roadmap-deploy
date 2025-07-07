@@ -1,0 +1,31 @@
+---
+global:
+  domain:
+    prefix: dev
+app:
+  image:
+    tag: "4.4.0-dev.2-app"
+assets:
+  image:
+    tag: "4.4.0-dev.2-assets"
+ingress:
+  certManager:
+    issuer: "letsencrypt-dev-cloudflare"
+    acme:
+      # Use staging server for dev environment
+      server: "https://acme-staging-v02.api.letsencrypt.org/directory"
+storage:
+  cephfs:
+    volumes:
+      locales:
+        path: "/volumes/_nogroup/a2b85f14-843e-40fe-a6b0-8c4d895312f2"
+      uploads:
+        path: "/volumes/_nogroup/b2f2d190-3db0-4ada-96db-e05d000e4af0"
+config:
+  mailer:
+    from: noreply@dmp-pgd.ca
+    to: dmp-assistant@tech.alliancecan.ca
+    smtpAddress: mail-relay-east.computecanada.ca
+    smtpDomain: dmp-pgd.ca
+  environment:
+    rollbarEnv: arbutus-dev

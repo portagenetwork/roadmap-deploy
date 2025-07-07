@@ -1,0 +1,27 @@
+# Deployment specific ignores
+environments/kestrel.crt
+environments/dev/secrets/
+environments/staging/secrets/
+environments/prod/secrets/
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Documentation build artifacts
+/docs/_build/
+/docs/.doctrees/

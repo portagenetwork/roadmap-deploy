@@ -1,0 +1,22 @@
+---
+# Use default configuration as base
+default: true
+
+# Line length - allow longer lines for code examples
+MD013:
+  line_length: 120
+  code_blocks: false
+  tables: false
+
+# Trailing punctuation in headers - allow question marks
+MD026:
+  punctuation: ".,;:!"
+
+# Inline HTML - allow for better formatting
+MD033: false
+
+# Bare URLs - allow for simplicity in some contexts
+MD034: false
+
+# HTML comments - allow for documentation purposes
+MD041: false

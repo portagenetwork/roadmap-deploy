@@ -1,0 +1,61 @@
+---
+global:
+  priorityClassName: uber-user-preempt-high
+  domain:
+    name: dmp-pgd.ca
+
+config:
+  mailer:
+    from: support@portagenetwork.ca
+    to: support@portagenetwork.ca
+    smtpAddress: smtp.gmail.com
+    smtpDomain: portagenetwork.ca
+  environment:
+    rollbarEnv: arbutus
+
+app:
+  envFrom:
+    - secretRef:
+        name: dmp-roadmap-db
+    - secretRef:
+        name: dmp-roadmap-devise-secrets
+    - secretRef:
+        name: dmp-roadmap-integrations
+
+cronjobs:
+  translationSync:
+    priorityClassName: uber-user-preempt-medium
+  researchDataOutput:
+    priorityClassName: uber-user-preempt-medium
+  statBuild:
+    priorityClassName: uber-user-preempt-medium
+
+ingress:
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  certManager:
+    enabled: true
+    issuer: "letsencrypt-prod-cloudflare"
+    acme:
+      server: "https://acme-v02.api.letsencrypt.org/directory"
+      email: "shaun.bathgate@westdri.ca" # TODO: update to group account
+      dns01:
+        enabled: true
+        cloudflare:
+          email: "shaun.bathgate@westdri.ca" # TODO: update to group account
+          apiTokenSecretRef:
+            name: "cert-manager-api-secrets"
+            key: "CF_API_KEY"
+    certificateRequestPolicy:
+      enabled: true
+    rbac:
+      enabled: true
+storage:
+  type: cephfs
+  cephfs:
+    monitors:
+      - 10.30.201.3:6789
+      - 10.30.202.3:6789
+      - 10.30.203.3:6789
