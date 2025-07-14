@@ -48,8 +48,6 @@ ingress:
           apiTokenSecretRef:
             name: "cert-manager-api-secrets"
             key: "CF_API_KEY"
-    certificateRequestPolicy:
-      enabled: true
     rbac:
       enabled: true
 storage:
