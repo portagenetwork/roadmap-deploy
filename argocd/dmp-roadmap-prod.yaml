@@ -3,9 +3,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/manifest-generate-paths: >-
-      /environments/**;
-      /charts/**;
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   name: dmp-roadmap-prod
   namespace: dmp-roadmap-prod
@@ -31,6 +28,9 @@ spec:
       repoURL: https://github.com/portagenetwork/roadmap.git
       targetRevision: deployment-portage
   syncPolicy:
+    # automated:
+    #   prune: true
+    #   selfHeal: true
     retry:
       backoff:
         duration: 5s
