@@ -4,10 +4,10 @@ global:
     prefix: staging
 app:
   image:
-    tag: "4.3.0-rc.1-app"
+    tag: "4.4.0-rc.1-app"
 assets:
   image:
-    tag: "4.3.0-rc.1-assets"
+    tag: "4.4.0-rc.1-assets"
 ingress:
   certManager:
     issuer: "letsencrypt-staging-cloudflare"
@@ -21,5 +21,10 @@ storage:
       uploads:
         path: "/volumes/_nogroup/6a4a8728-6ee3-4151-b24a-eb2b84aef469"
 config:
+  mailer:
+    from: noreply@dmp-pgd.ca
+    to: dmp-assistant@tech.alliancecan.ca
+    smtpAddress: mail-relay-east.computecanada.ca
+    smtpDomain: dmp-pgd.ca
   environment:
     rollbarEnv: arbutus-staging
