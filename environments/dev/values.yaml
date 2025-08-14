@@ -22,10 +22,5 @@ storage:
       uploads:
         path: "/volumes/_nogroup/b2f2d190-3db0-4ada-96db-e05d000e4af0"
 config:
-  mailer:
-    from: noreply@dmp-pgd.ca
-    to: dmp-assistant@tech.alliancecan.ca
-    smtpAddress: mail-relay-east.computecanada.ca
-    smtpDomain: dmp-pgd.ca
   environment:
     rollbarEnv: arbutus-dev

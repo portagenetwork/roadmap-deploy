@@ -6,10 +6,10 @@ global:
 
 config:
   mailer:
-    from: support@portagenetwork.ca
-    to: support@portagenetwork.ca
-    smtpAddress: smtp.gmail.com
-    smtpDomain: portagenetwork.ca
+    from: noreply@dmp-pgd.ca
+    to: dmp-assistant@tech.alliancecan.ca
+    smtpAddress: mail-relay-east.computecanada.ca
+    smtpDomain: dmp-pgd.ca
   environment:
     rollbarEnv: arbutus
 
