@@ -4,10 +4,10 @@ global:
     prefix: dev
 app:
   image:
-    tag: "4.4.0-dev.4-app"
+    tag: "4.5.0-dev.1-app"
 assets:
   image:
-    tag: "4.4.0-dev.4-assets"
+    tag: "4.5.0-dev.1-assets"
 ingress:
   certManager:
     issuer: "letsencrypt-dev-cloudflare"
