@@ -1,0 +1,42 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: dmp-roadmap-sandbox
+  namespace: dmp-roadmap-sandbox
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dmp-roadmap-sandbox
+  project: dmp-roadmap
+  sources:
+    - ref: values
+      repoURL: https://github.com/portagenetwork/roadmap-deploy.git
+      targetRevision: main
+    - path: environments/sandbox/sealed-secrets
+      repoURL: https://github.com/portagenetwork/roadmap-deploy.git
+      targetRevision: main
+    - helm:
+        ignoreMissingValueFiles: true
+        releaseName: dmp-roadmap-sandbox
+        valueFiles:
+          - $values/environments/base/values.yaml
+          - $values/environments/sandbox/values.yaml
+      path: charts/dmp-roadmap
+      repoURL: https://github.com/portagenetwork/roadmap.git
+      targetRevision: deployment-portage
+  syncPolicy:
+    # automated:
+    #   prune: true
+    #   selfHeal: true
+    retry:
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 1m
+      limit: 1
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - CreateNamespace=true
