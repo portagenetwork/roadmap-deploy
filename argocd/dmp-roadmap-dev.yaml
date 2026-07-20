@@ -28,9 +28,9 @@ spec:
       repoURL: https://github.com/portagenetwork/roadmap.git
       targetRevision: deployment-portage
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
     retry:
       backoff:
         duration: 5s
