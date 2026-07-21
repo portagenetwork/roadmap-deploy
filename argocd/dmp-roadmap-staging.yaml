@@ -26,7 +26,7 @@ spec:
           - $values/environments/staging/values.yaml
       path: charts/dmp-roadmap
       repoURL: https://github.com/portagenetwork/roadmap.git
-      targetRevision: aaron/fix/add-startup-probe
+      targetRevision: deployment-portage
   syncPolicy:
     # automated:
     #   prune: true
