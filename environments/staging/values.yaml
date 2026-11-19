@@ -4,10 +4,10 @@ global:
     prefix: staging
 app:
   image:
-    tag: "5.0.0-dev.4-app"
+    tag: "5.0.0-app"
 assets:
   image:
-    tag: "5.0.0-dev.4-assets"
+    tag: "5.0.0-assets"
 ingress:
   certManager:
     issuer: "letsencrypt-staging-cloudflare"
